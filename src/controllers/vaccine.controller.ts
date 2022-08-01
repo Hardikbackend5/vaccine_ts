@@ -8,7 +8,10 @@ import {
 
 export async function getVaccineRecordHandler(req: Request, res: Response) {
   const c = get(req, "query.c");
-  const data = await findVaccineRecord({ c });
+  const range = get(req, "query.range");
+  const dateFrom = get(req, "query.dateFrom");
+  const dateTo = get(req, "query.dateTo");
+  const data = await findVaccineRecord({ c, range, dateFrom, dateTo  });
 
   if (!data) {
     return res.sendStatus(404);
